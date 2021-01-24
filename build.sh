@@ -1,0 +1,1 @@
+docker build -t zabbix-agent2-oracle:alpine-5.2-latest .
