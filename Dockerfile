@@ -10,7 +10,7 @@ ENV ORACLE_HOME=/oracle_client/instantclient_12_1  \
 	
 # add files: instantclient_12_1 docker-entrypoint.sh
 # fixbug: automated build not support .tar.gz, but i can.
-COPY instantclient_12_1.tar.gz /
+COPY ["instantclient_12_1.tar.gz", "/tmp"]
 COPY ["docker-entrypoint.sh", "/usr/bin/"]
 	
 # install agent2
@@ -19,8 +19,8 @@ RUN yum localinstall -y https://mirrors.aliyun.com/zabbix/zabbix/5.2/rhel/7/x86_
 # install instantclient_12_1 sqlplus
     yum install -y libaio && \
 	mkdir -p /oracle_client && \
-	tar -xvf /instantclient_12_1.tar.gz -C /oracle_client && \
-	rm -rf /instantclient_12_1.tar.gz && \
+	tar -zxvf /tmp/instantclient_12_1.tar.gz -C /oracle_client && \
+	rm -rf /tmp/* && \
 	cd /oracle_client/instantclient_12_1 && \
 	ln -s libclntsh.so.12.1 libclntsh.so && \
 	ln -s libocci.so.12.1 libocci.so && \
