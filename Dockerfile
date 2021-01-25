@@ -19,7 +19,7 @@ RUN yum localinstall -y https://mirrors.aliyun.com/zabbix/zabbix/5.2/rhel/7/x86_
 # install instantclient_12_1 sqlplus
     yum install -y libaio && \
 	mkdir -p /oracle_client && \
-	tar -zxvf /instantclient_12_1.tar.gz -C /oracle_client && \
+	tar -xvf /instantclient_12_1.tar.gz -C /oracle_client && \
 	rm -rf /instantclient_12_1.tar.gz && \
 	cd /oracle_client/instantclient_12_1 && \
 	ln -s libclntsh.so.12.1 libclntsh.so && \
