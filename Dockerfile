@@ -1,11 +1,20 @@
 FROM centos:centos7 as build-env
-COPY ["instantclient_12_1.zip", "/tmp"]
+
 RUN yum install -y unzip && \
     mkdir -p /oracle_client/ && \
-    unzip /tmp/instantclient_12_1.zip -d /oracle_client && \
+    curl -o instantclient_12_1.zip http://www.coldsmog.cn:9000/blog/instantclient_12_1.zip && \
+    unzip instantclient_12_1.zip -d /oracle_client && \
     cd /oracle_client/instantclient_12_1 && \
 	ln -s libclntsh.so.12.1 libclntsh.so && \
 	ln -s libocci.so.12.1 libocci.so 
+# if your clone this git repository
+# COPY ["instantclient_12_1.zip", "./"]
+# RUN yum install -y unzip && \
+#    mkdir -p /oracle_client/ && \
+#    unzip instantclient_12_1.zip -d /oracle_client && \
+#    cd /oracle_client/instantclient_12_1 && \
+#	ln -s libclntsh.so.12.1 libclntsh.so && \
+#	ln -s libocci.so.12.1 libocci.so 
 
 FROM centos:centos7
 
