@@ -23,7 +23,13 @@ Zabbix agent 2 部署在监视的目标上，可主动监控本地资源和应�
 instantclient_12_1.tar.gz是下载oracle官方的instantclient-sqlplus-linux.x64-12.1.0.2.zip和instantclient-basic-linux.x64-12.1.0.2.0.zip 解压后重新用tar压缩，需要更换的话自行克隆压缩吧.其余的看GitHub[coldsmog/zabbix-agent2-oracle](https://github.com/coldsmog/zabbix-agent2-oracle)
 
 # 如何使用这个镜像？和官方alpine-4.4-latest使用方式一致。
-[https://hub.docker.com/r/zabbix/zabbix-agent2](https://hub.docker.com/r/zabbix/zabbix-agent2)
+
+
+使用时 zabbix-server 配置对应主机，链接模版 Templates/Databases: Oracle by Zabbix Agent 2，
+
+随后计息配置主机的宏，继承模版的{$ORACLE.CONNSTRING}、{$ORACLE.SERVICE}、{$ORACLE.USER}、{$ORACLE.PASSWORD}宏并修改覆盖其值即可
+
+使用手册[https://www.zabbix.com/cn/integrations/oracle](https://www.zabbix.com/cn/integrations/oracle)
 
 也许你需要一个docker-compose.yml文件参考？
 
@@ -46,6 +52,8 @@ services:
       - /var/lib/zabbix/enc:/var/lib/zabbix/enc
       - /var/lib/zabbix/modules:/var/lib/zabbix/modules
 ```
+
+官方镜像参考[https://hub.docker.com/r/zabbix/zabbix-agent2](https://hub.docker.com/r/zabbix/zabbix-agent2)
 
 ## 环境变量
 
